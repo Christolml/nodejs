@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contador de conexiones Socket.IO</title>
+</head>
+<body>
+    <h1>Comunicacion bidireccional con Socket.IO</h1>
+    <!-- en este primer p es donde se va a estr mandando ensajes -->
+    <p id="hello" ></p> 
+    <!-- Aqui se va poniendo el num de conexiones -->
+    <p>Numero de conexiones activas: <b id="conexiones"></b>
+    </p>
+
+    <script src="./socket.io/socket.io.js"></script>
+    <script>
+        (function (d, io) {
+            'use strict';
+            var io = io();
+            /* se esta cachando la emision del mensaje del servidor y se tiene que poner el nombre del evento del emit en este caso fue "hello"
+            la funcion va a recibir (en data) los datos del mensaje que esta emitiendo el servidor
+            con querySelector me selecciona un elemento del html y le paso el id de ese elemento para despues agregar el mensaje 
+            enviado del servidor */
+            io.on('hello', function (data) {
+                console.log(data);
+                d.querySelector('#hello').innerHTML = data.message;
+                io.emit('otro evento', {
+                    name: 'Christopher',
+                    alias: 'ElProChris'
+                });
+            });
+
+
+            io.on('connect users', function (data) {
+                console.log(`Actualizando desde el servidor. Hay ${data.numbers} conexiones activas`);
+                d.querySelector('#conexiones').innerHTML = data.numbers;
+            });
+
+        })(document, io);
+    </script>
+</body>
+</html>
