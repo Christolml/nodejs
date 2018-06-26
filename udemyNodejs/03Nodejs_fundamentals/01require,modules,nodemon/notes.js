@@ -1,4 +1,4 @@
-console.log('starting app!');
+console.log('starting notes.js!');
 
 // module.exports.age = 21;
 
