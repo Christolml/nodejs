@@ -5,6 +5,22 @@ let addNote = (title,body) => {
 };
 
 
+let getAll = () => {
+    console.log('Getting all notes');
+};
+
+let getNote = (title) => {
+    console.log('Reading note', title)
+};
+
+let deleteNote = (title) => {
+    console.log('Deleting note', title);
+};
+
+
 module.exports = {
-    addNote
+    addNote,
+    getAll,
+    getNote,
+    deleteNote
 };
